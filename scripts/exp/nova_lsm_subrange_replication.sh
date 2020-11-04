@@ -1,6 +1,6 @@
 #!/bin/bash
-home_dir="/proj/bg-PG0/haoyu"
-# home_dir="/proj/BG/haoyu"
+home_dir="/proj/bg-PG0/kanakia"
+# home_dir="/proj/BG/kanakia"
 config_dir="$home_dir/config"
 db_dir="$home_dir/db"
 script_dir="$home_dir/scripts"
@@ -452,4 +452,4 @@ maxexecutiontime="1200"
 
 # done
 
-python /proj/bg-PG0/haoyu/latest/parse_ycsb_nova_leveldb.py 25 $exp_results_dir > scale_out
+python /proj/bg-PG0/kanakia/latest/parse_ycsb_nova_leveldb.py 25 $exp_results_dir > scale_out

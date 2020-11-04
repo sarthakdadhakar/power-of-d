@@ -1,6 +1,6 @@
 #!/bin/bash
-home_dir="/proj/bg-PG0/haoyu"
-# home_dir="/proj/BG/haoyu"
+home_dir="/proj/bg-PG0/kanakia"
+# home_dir="/proj/BG/kanakia"
 config_dir="$home_dir/config"
 db_dir="$home_dir/db"
 script_dir="$home_dir/scripts"

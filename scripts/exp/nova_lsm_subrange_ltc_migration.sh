@@ -1,11 +1,13 @@
 #!/bin/bash
-home_dir="/proj/bg-PG0/haoyu"
-# home_dir="/proj/BG/haoyu"
+
+user=$3
+home_dir="/users/$3"
+# home_dir="/proj/BG/kanakia"
 config_dir="$home_dir/config"
 db_dir="$home_dir/db"
-script_dir="$home_dir/scripts"
+script_dir="$home_dir/scripts/exp"
 cache_bin_dir="$home_dir/nova"
-client_bin_dir="/tmp/YCSB-Nova"
+client_bin_dir="/tmp/NovaLSM-YCSB-Client"
 results="/tmp/results"
 recordcount="$1"
 exp_results_dir="$home_dir/august-11-nova-lsm-sr-zipfian-ltc-migration-$recordcount"
@@ -464,4 +466,4 @@ done
 
 done
 
-python /proj/bg-PG0/haoyu/scripts/parse_ycsb_nova_leveldb.py $nmachines $exp_results_dir > stats_ltc_migration_out
+python /proj/bg-PG0/kanakia/scripts/parse_ycsb_nova_leveldb.py $nmachines $exp_results_dir > stats_ltc_migration_out

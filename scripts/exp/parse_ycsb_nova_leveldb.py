@@ -1044,4 +1044,4 @@ exp_dir=sys.argv[2]
 exps=parse_exp(exp_dir)
 print_all(exps)
 
-# report_major_compaction_time("/proj/bg-PG0/haoyu/nova/LOG-0")
+# report_major_compaction_time("/proj/bg-PG0/kanakia/nova/LOG-0")

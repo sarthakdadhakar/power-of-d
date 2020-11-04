@@ -1,6 +1,6 @@
 #!/bin/bash
-home_dir="/proj/bg-PG0/haoyu"
-# home_dir="/proj/BG/haoyu"
+home_dir="/proj/bg-PG0/kanakia"
+# home_dir="/proj/BG/kanakia"
 config_dir="$home_dir/config"
 db_dir="$home_dir/db"
 script_dir="$home_dir/scripts"
@@ -406,4 +406,4 @@ done
 done
 done
 
-python /proj/bg-PG0/haoyu/scripts/parse_ycsb_nova_leveldb.py 25 $exp_results_dir > stats_wr_lsm_leveldb_10_servers_ranges_out_$recordcount
+python /proj/bg-PG0/kanakia/scripts/parse_ycsb_nova_leveldb.py 25 $exp_results_dir > stats_wr_lsm_leveldb_10_servers_ranges_out_$recordcount

@@ -1,4 +1,4 @@
-C:\Users\sarthak\.CLion2019.2\system\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master"
+C:\Users\sarthak\.CLion2019.2\system\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/power-of-d"
 -- The C compiler identification is GNU 7.4.0
 -- The CXX compiler identification is GNU 7.4.0
 -- Check for working C compiler: /usr/bin/cc
@@ -55,5 +55,5 @@ Call Stack (most recent call first):
 -- Looking for pthread_create - found
 -- Found Threads: TRUE  
 -- Configuring incomplete, errors occurred!
-See also "/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeOutput.log".
-See also "/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeError.log".
+See also "/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/power-of-d/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/power-of-d/cmake-build-debug/CMakeFiles/CMakeError.log".

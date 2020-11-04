@@ -12,6 +12,7 @@ namespace nova {
                NovaConfig::config->max_msg_size;
     }
 
+    // doubt : what is DC ( Data container from Nova paper?)
     uint64_t nrdma_buf_server() {
         // A CC async/bg thread connects to one thread at each DC.
         uint64_t nrdmatotal = nrdma_buf_unit() *

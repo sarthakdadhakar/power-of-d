@@ -1,6 +1,6 @@
 #!/bin/bash
-home_dir="/proj/bg-PG0/haoyu"
-# home_dir="/proj/BG/haoyu"
+home_dir="/proj/bg-PG0/kanakia"
+# home_dir="/proj/BG/kanakia"
 config_dir="$home_dir/config"
 db_dir="$home_dir/db"
 script_dir="$home_dir/scripts"
@@ -427,4 +427,4 @@ done
 done
 
 cp elastic_coord_* $exp_results_dir/
-python /proj/bg-PG0/haoyu/scripts/parse_ycsb_nova_leveldb.py $nmachines $exp_results_dir > stats_ltc_elastic_out
+python /proj/bg-PG0/kanakia/scripts/parse_ycsb_nova_leveldb.py $nmachines $exp_results_dir > stats_ltc_elastic_out

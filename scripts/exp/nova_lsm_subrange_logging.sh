@@ -1,6 +1,6 @@
 #!/bin/bash
-home_dir="/proj/bg-PG0/haoyu"
-# home_dir="/proj/BG/haoyu"
+home_dir="/proj/bg-PG0/kanakia"
+# home_dir="/proj/BG/kanakia"
 config_dir="$home_dir/config"
 db_dir="$home_dir/db"
 script_dir="$home_dir/scripts"
@@ -410,4 +410,4 @@ log_record_mode="none"
 num_log_replicas="0"
 run_bench
 
-python /proj/bg-PG0/haoyu/scripts/parse_ycsb_nova_leveldb.py 22 /proj/bg-PG0/haoyu/nova-lsm-sr-logging-10000000 > stats_logging_out
+python /proj/bg-PG0/kanakia/scripts/parse_ycsb_nova_leveldb.py 22 /proj/bg-PG0/kanakia/nova-lsm-sr-logging-10000000 > stats_logging_out

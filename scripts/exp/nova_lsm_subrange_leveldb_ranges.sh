@@ -1,15 +1,19 @@
 #!/bin/bash
-home_dir="/proj/bg-PG0/haoyu"
-# home_dir="/proj/BG/haoyu"
+
+recordcount="$1"
+dryrun="$2"
+user="$3"
+
+home_dir="/users/$user"
 config_dir="$home_dir/config"
 db_dir="$home_dir/db"
-script_dir="$home_dir/scripts"
+script_dir="$home_dir/scripts/exp"
 cache_bin_dir="$home_dir/nova"
 client_bin_dir="/tmp/YCSB-Nova"
 results="/tmp/results"
-recordcount="$1"
+
 exp_results_dir="$home_dir/scan-new-nova-lsm-sr-leveldb-ranges-$recordcount"
-dryrun="$2"
+
 
 mkdir -p $results
 mkdir -p $exp_results_dir
@@ -390,4 +394,4 @@ done
 # done
 # done
 # done
-python /proj/bg-PG0/haoyu/scripts/parse_ycsb_nova_leveldb.py $nmachines $exp_results_dir > stats_lsm_leveldb_ranges_out
+python /proj/bg-PG0/kanakia/scripts/parse_ycsb_nova_leveldb.py $nmachines $exp_results_dir > stats_lsm_leveldb_ranges_out

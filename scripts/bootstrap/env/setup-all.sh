@@ -1,6 +1,10 @@
 #!/bin/bash
-basedir="/proj/bg-PG0/haoyu"
 
+#example call: ./init.sh 2 sayee
+user=$1
+basedir="/users/$user"
+
+echo "basedir... $basedir"
 export DEBIAN_FRONTEND=noninteractive
 
 sudo apt-get update
@@ -92,7 +96,7 @@ cd oprofile-1.3.0 && ./configure && make -j32 && sudo make install
 # operf /path/to/mybinary
 # opreport --symbols
 
-rm -rf /tmp/YCSB-Nova
-cp -r "$basedir/YCSB-Nova/" /tmp/
-cd /tmp/YCSB-Nova
+rm -rf /tmp/NovaLSM-YCSB-Client
+cp -r "$basedir/NovaLSM-YCSB-Client/" /tmp/
+cd /tmp/NovaLSM-YCSB-Client
 mvn -pl com.yahoo.ycsb:jdbc-binding -am clean package -DskipTests

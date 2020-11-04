@@ -1,6 +1,6 @@
 #!/bin/bash
-home_dir="/proj/bg-PG0/haoyu"
-# home_dir="/proj/BG/haoyu"
+home_dir="/proj/bg-PG0/kanakia"
+# home_dir="/proj/BG/kanakia"
 config_dir="$home_dir/config"
 db_dir="$home_dir/db"
 script_dir="$home_dir/scripts"
@@ -363,4 +363,4 @@ run_bench
 done
 done
 
-python /proj/bg-PG0/haoyu/scripts/parse_ycsb_nova_leveldb.py $nmachines $exp_results_dir > stats_skewed_impact_out
+python /proj/bg-PG0/kanakia/scripts/parse_ycsb_nova_leveldb.py $nmachines $exp_results_dir > stats_skewed_impact_out
