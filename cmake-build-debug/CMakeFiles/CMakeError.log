@@ -1,0 +1,108 @@
+Determining if the function crc32c_value exists in the crc32c failed with the following output:
+Change Dir: /cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make.exe cmTC_ad09d/fast 
+/usr/bin/make -f CMakeFiles/cmTC_ad09d.dir/build.make CMakeFiles/cmTC_ad09d.dir/build
+make[1]: Entering directory '/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ad09d.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=crc32c_value   -o CMakeFiles/cmTC_ad09d.dir/CheckFunctionExists.c.o   -c /cygdrive/c/Users/sarthak/.CLion2019.2/system/cygwin_cmake/share/cmake-3.14.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_ad09d.exe
+/cygdrive/c/Users/sarthak/.CLion2019.2/system/cygwin_cmake/bin/cmake.exe -E cmake_link_script CMakeFiles/cmTC_ad09d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=crc32c_value  -Wl,--enable-auto-import  CMakeFiles/cmTC_ad09d.dir/CheckFunctionExists.c.o  -o cmTC_ad09d.exe -Wl,--out-implib,libcmTC_ad09d.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -lcrc32c 
+/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/../../../../x86_64-pc-cygwin/bin/ld: cannot find -lcrc32c
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_ad09d.dir/build.make:87: cmTC_ad09d.exe] Error 1
+make[1]: Leaving directory '/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_ad09d/fast] Error 2
+
+
+Determining if the function snappy_compress exists in the snappy failed with the following output:
+Change Dir: /cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make.exe cmTC_379bc/fast 
+/usr/bin/make -f CMakeFiles/cmTC_379bc.dir/build.make CMakeFiles/cmTC_379bc.dir/build
+make[1]: Entering directory '/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_379bc.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=snappy_compress   -o CMakeFiles/cmTC_379bc.dir/CheckFunctionExists.c.o   -c /cygdrive/c/Users/sarthak/.CLion2019.2/system/cygwin_cmake/share/cmake-3.14.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_379bc.exe
+/cygdrive/c/Users/sarthak/.CLion2019.2/system/cygwin_cmake/bin/cmake.exe -E cmake_link_script CMakeFiles/cmTC_379bc.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=snappy_compress  -Wl,--enable-auto-import  CMakeFiles/cmTC_379bc.dir/CheckFunctionExists.c.o  -o cmTC_379bc.exe -Wl,--out-implib,libcmTC_379bc.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -lsnappy 
+/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/../../../../x86_64-pc-cygwin/bin/ld: cannot find -lsnappy
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_379bc.dir/build.make:87: cmTC_379bc.exe] Error 1
+make[1]: Leaving directory '/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_379bc/fast] Error 2
+
+
+Determining if the function malloc exists in the tcmalloc failed with the following output:
+Change Dir: /cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make.exe cmTC_a7496/fast 
+/usr/bin/make -f CMakeFiles/cmTC_a7496.dir/build.make CMakeFiles/cmTC_a7496.dir/build
+make[1]: Entering directory '/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a7496.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=malloc   -o CMakeFiles/cmTC_a7496.dir/CheckFunctionExists.c.o   -c /cygdrive/c/Users/sarthak/.CLion2019.2/system/cygwin_cmake/share/cmake-3.14.5/Modules/CheckFunctionExists.c
+<command-line>:0:23: warning: conflicting types for built-in function 'malloc' [-Wbuiltin-declaration-mismatch]
+/cygdrive/c/Users/sarthak/.CLion2019.2/system/cygwin_cmake/share/cmake-3.14.5/Modules/CheckFunctionExists.c:7:3: note: in expansion of macro 'CHECK_FUNCTION_EXISTS'
+   CHECK_FUNCTION_EXISTS(void);
+   ^~~~~~~~~~~~~~~~~~~~~
+Linking C executable cmTC_a7496.exe
+/cygdrive/c/Users/sarthak/.CLion2019.2/system/cygwin_cmake/bin/cmake.exe -E cmake_link_script CMakeFiles/cmTC_a7496.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=malloc  -Wl,--enable-auto-import  CMakeFiles/cmTC_a7496.dir/CheckFunctionExists.c.o  -o cmTC_a7496.exe -Wl,--out-implib,libcmTC_a7496.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -ltcmalloc 
+/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/../../../../x86_64-pc-cygwin/bin/ld: cannot find -ltcmalloc
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_a7496.dir/build.make:87: cmTC_a7496.exe] Error 1
+make[1]: Leaving directory '/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_a7496/fast] Error 2
+
+
+Determining if the F_FULLFSYNC exist failed with the following output:
+Change Dir: /cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make.exe cmTC_c02d8/fast 
+/usr/bin/make -f CMakeFiles/cmTC_c02d8.dir/build.make CMakeFiles/cmTC_c02d8.dir/build
+make[1]: Entering directory '/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_c02d8.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++.exe    -g    -o CMakeFiles/cmTC_c02d8.dir/CheckSymbolExists.cxx.o -c "/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx"
+/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function 'int main(int, char**)':
+/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: 'F_FULLFSYNC' was not declared in this scope
+   return ((int*)(&F_FULLFSYNC))[argc];
+                   ^~~~~~~~~~~
+/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: note: suggested alternative: '_FASYNC'
+   return ((int*)(&F_FULLFSYNC))[argc];
+                   ^~~~~~~~~~~
+                   _FASYNC
+make[1]: *** [CMakeFiles/cmTC_c02d8.dir/build.make:66: CMakeFiles/cmTC_c02d8.dir/CheckSymbolExists.cxx.o] Error 1
+make[1]: Leaving directory '/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_c02d8/fast] Error 2
+
+File /cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <fcntl.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef F_FULLFSYNC
+  return ((int*)(&F_FULLFSYNC))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Performing C++ SOURCE FILE Test HAVE_CLANG_THREAD_SAFETY failed with the following output:
+Change Dir: /cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make.exe cmTC_cf9ea/fast 
+/usr/bin/make -f CMakeFiles/cmTC_cf9ea.dir/build.make CMakeFiles/cmTC_cf9ea.dir/build
+make[1]: Entering directory '/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_cf9ea.dir/src.cxx.o
+/usr/bin/c++.exe    -g -DHAVE_CLANG_THREAD_SAFETY   -Wthread-safety -o CMakeFiles/cmTC_cf9ea.dir/src.cxx.o -c "/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx"
+c++: error: unrecognized command line option '-Wthread-safety'; did you mean '-fthread-jumps'?
+make[1]: *** [CMakeFiles/cmTC_cf9ea.dir/build.make:66: CMakeFiles/cmTC_cf9ea.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/cygdrive/d/College/USC/Fall 2020/CSCI 550 - Advanced Data Stores/Project/novalsm-master/cmake-build-debug/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_cf9ea/fast] Error 2
+
+Source file was:
+int main() { return 0; }
