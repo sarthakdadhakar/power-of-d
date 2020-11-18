@@ -265,7 +265,7 @@ namespace leveldb {
             num_stocs_to_select = std::max(num_stocs_to_select,
                                            nova::NovaConfig::config->number_of_sstable_metadata_replicas);
         }
-
+        //sayee&sarthak selecting storage!!!!
         StorageSelector selector(rand_seed_);
         selector.SelectStorageServers(client,
                                       nova::NovaConfig::config->scatter_policy,

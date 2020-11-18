@@ -1,0 +1,1 @@
+/usr/bin/g++   -g   CMakeFiles/memtable_bench.dir/bench_memtable/memtable_bench.cpp.o  -o memtable_bench  -lgflags libleveldb.a -lpthread -libverbs -levent -lfmt 

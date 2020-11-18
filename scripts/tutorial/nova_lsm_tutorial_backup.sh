@@ -1,21 +1,22 @@
 #!/bin/bash
-home_dir="/proj/bg-PG0/kanakia"
+home_dir="proj/bg-PG0/sayee"
 # home_dir="/proj/BG/kanakia"
 config_dir="$home_dir/config"
 db_dir="$home_dir/db"
 script_dir="$home_dir/scripts"
 cache_bin_dir="$home_dir/nova"
-client_bin_dir="/tmp/YCSB-Nova"
+client_bin_dir="$home_dir/NovaLSM-YCSB-Client"
 results="/tmp/results"
 recordcount="$1"
 exp_results_dir="$home_dir/nova-tutorial-backup-$recordcount"
 dryrun="$2"
 
+
 mkdir -p $results
 mkdir -p $exp_results_dir
 
-nservers="3"
-nclients="6"
+nservers="5"
+nclients="1"
 
 # YCSB
 maxexecutiontime=300
@@ -184,8 +185,6 @@ function run_bench() {
 		nova_rdma_port=$((nova_rdma_port+1))
 		sleep 1
 	done
-
-	sleep 30
 	for c in ${clis[@]}
 	do
 		for i in $(seq 1 $nclients_per_server);

@@ -208,7 +208,7 @@ namespace leveldb {
             }
             return;
         }
-
+        //sayee&sarthak: Power of D for writing
         std::vector<uint32_t> candidate_storage_ids;
         if (scatter_policy == nova::ScatterPolicy::POWER_OF_TWO) {
             uint32_t start_storage_id = rand_r(rand_seed_) %

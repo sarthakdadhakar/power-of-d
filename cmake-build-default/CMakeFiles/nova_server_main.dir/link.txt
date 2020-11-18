@@ -1,0 +1,1 @@
+/usr/bin/g++   -g   CMakeFiles/nova_server_main.dir/novalsm/nova_server_main.cpp.o  -o nova_server_main  /usr/lib/x86_64-linux-gnu/libgflags.a libleveldb.a -lpthread -libverbs -levent -lfmt 

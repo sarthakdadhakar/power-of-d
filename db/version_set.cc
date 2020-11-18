@@ -458,6 +458,7 @@ namespace leveldb {
 
                 state->last_file_read = f;
                 state->last_file_read_level = level;
+                //sayee&sarthak: read function called here. from here to : dbformat
                 state->s = state->table_cache->Get(*state->options,
                                                    f,
                                                    f->number,

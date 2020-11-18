@@ -1,11 +1,11 @@
 #!/bin/bash
-home_dir="/proj/bg-PG0/kanakia"
+home_dir="/proj/bg-PG0/sayee"
 # home_dir="/proj/BG/kanakia"
 config_dir="$home_dir/config"
 db_dir="$home_dir/db"
 script_dir="$home_dir/scripts"
 cache_bin_dir="$home_dir/nova"
-client_bin_dir="/tmp/YCSB-Nova"
+client_bin_dir="$home_dir/NovaLSM-YCSB-Client"
 results="/tmp/results"
 recordcount="$1"
 exp_results_dir="$home_dir/nova-tutorial-$recordcount"
@@ -14,8 +14,8 @@ dryrun="$2"
 mkdir -p $results
 mkdir -p $exp_results_dir
 
-nservers="3"
-nclients="6"
+nservers="5"
+nclients="1"
 
 # YCSB
 maxexecutiontime=300
@@ -356,4 +356,4 @@ nthreads="512"
 run_bench
 
 
-python /proj/bg-PG0/kanakia/scripts/parse_ycsb_nova_leveldb.py $nmachines $exp_results_dir > stats_tutorial_out
+python /users/sayee/scripts/parse_ycsb_nova_leveldb.py $nmachines $exp_results_dir > stats_tutorial_out

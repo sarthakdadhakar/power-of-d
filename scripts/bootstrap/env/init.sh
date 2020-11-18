@@ -3,18 +3,19 @@
 #example call: ./init.sh 2 sayee
 numServers=$1
 user=$2
-basedir="/users/$user"
+basedir="/proj/bg-PG0/$user"
 prefix="h"
 
 for ((i=0;i<numServers;i++)); do
 	echo "*******************************************"
 	echo "*******************************************"
-   	echo "******************* node-$i ********************"
-   	echo "*******************************************"
-   	echo "*******************************************"
+  echo "******************* node-$i ********************"
+  echo "*******************************************"
+  echo "*******************************************"
  	ssh -oStrictHostKeyChecking=no node-$i "sudo apt-get update"
-    ssh -oStrictHostKeyChecking=no node-$i "sudo apt-get --yes install screen"
-    ssh -n -f -oStrictHostKeyChecking=no node-$i screen -L -S env1 -dm "$basedir/scripts/env/setup-all.sh $user"
+  ssh -oStrictHostKeyChecking=no node-$i "sudo apt-get --yes install screen"
+  ssh -n -f -oStrictHostKeyChecking=no node-$i screen -L -S env1 -dm "$basedir/scripts/env/setup-all.sh $user"
+
 done
 
 sleep 10

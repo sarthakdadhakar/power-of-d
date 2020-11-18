@@ -1,0 +1,1 @@
+/usr/bin/g++   -g -g   CMakeFiles/scatter_bench.dir/benchmarks/scatter_bench.cpp.o  -o scatter_bench  -lgflags libleveldb.a -lpthread -libverbs -levent -lfmt 

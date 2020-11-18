@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#example call: ./init.sh 2 sayee
+#example call: ./setup-all sayee
 user=$1
-basedir="/users/$user"
+basedir="/proj/bg-PG0/$user"
 
 echo "basedir... $basedir"
 export DEBIAN_FRONTEND=noninteractive

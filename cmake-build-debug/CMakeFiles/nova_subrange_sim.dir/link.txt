@@ -1,0 +1,1 @@
+/usr/bin/g++   -g -g   CMakeFiles/nova_subrange_sim.dir/novalsm/nova_subrange_sim_test.cpp.o  -o nova_subrange_sim  -lgflags libleveldb.a -pg -lpthread -libverbs -levent -lfmt 

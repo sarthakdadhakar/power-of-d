@@ -1,0 +1,1 @@
+/usr/bin/g++   -g -g   CMakeFiles/version_set_test.dir/db/version_set_test.cc.o  -o version_set_test  -lgflags libleveldb.a -lpthread -libverbs -levent -lfmt 
