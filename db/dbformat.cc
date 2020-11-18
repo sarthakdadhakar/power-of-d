@@ -245,7 +245,7 @@ namespace leveldb {
         }
         int replica_id = -1;
         auto servers = leveldb::StorageSelector::available_stoc_servers.load();
-        // sayee&sarthak: Selecting 1st available replica
+        // power of D : Selecting 1st available replica
         for (int i = 0; i < block_replica_handles.size(); i++) {
             if (servers->server_ids.find(block_replica_handles[i].meta_block_handle.server_id) !=
                 servers->server_ids.end()) {

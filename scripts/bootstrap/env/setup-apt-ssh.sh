@@ -36,38 +36,38 @@ for((i=0;i<END;i++)); do
 #    scp -r $LOCAL_HOME/../exp/*sh ${host[i]}:/users/sayee/scripts/exp
 #    scp -r $LOCAL_HOME/*conf ${host[i]}:/users/sayee/scripts
 done
-#
-#for ((i=0;i<END;i++)); do
-#    echo "building server on node $i"
-#    ssh -oStrictHostKeyChecking=no $user@node-$i.${host} "bash $setup_script/setup-ssh.sh"
-#
-##    ssh -oStrictHostKeyChecking=no ${host[i]} "bash $setup_script/setup-ssh.sh"
-#done
-#
-#echo "cloning YCSB client in node 0"
-#ssh -oStrictHostKeyChecking=no $user@node-0.${host} "rm -rf NovaLSM-YCSB-Client"
-#ssh -oStrictHostKeyChecking=no $user@node-0.${host} "git clone https://github.com/HaoyuHuang/NovaLSM-YCSB-Client.git"
-#
-##ssh -oStrictHostKeyChecking=no ${host[0]} "rm -rf NovaLSM-YCSB-Client"
-##ssh -oStrictHostKeyChecking=no ${host[0]} "git clone https://github.com/HaoyuHuang/NovaLSM-YCSB-Client.git"
-#
-#if [[ $no_copy != "no_copy" ]]
-#then
-#  for ((i=0;i<END;i++)); do
-#      echo "copying configs on node $i"
-#      ssh -oStrictHostKeyChecking=no $user@node-$i.${host} "sudo cp $limit_dir/ulimit.conf /etc/systemd/user.conf"
-#      ssh -oStrictHostKeyChecking=no $user@node-$i.${host} "sudo cp $limit_dir/sys_ulimit.conf /etc/systemd/system.conf"
-#      ssh -oStrictHostKeyChecking=no $user@node-$i.${host} "sudo cp $limit_dir/limit.conf /etc/security/limits.conf"
+
+for ((i=0;i<END;i++)); do
+    echo "building server on node $i"
+    ssh -oStrictHostKeyChecking=no $user@node-$i.${host} "bash $setup_script/setup-ssh.sh"
+
+#    ssh -oStrictHostKeyChecking=no ${host[i]} "bash $setup_script/setup-ssh.sh"
+done
+
+echo "cloning YCSB client in node 0"
+ssh -oStrictHostKeyChecking=no $user@node-0.${host} "rm -rf NovaLSM-YCSB-Client"
+ssh -oStrictHostKeyChecking=no $user@node-0.${host} "git clone https://github.com/HaoyuHuang/NovaLSM-YCSB-Client.git"
+
+#ssh -oStrictHostKeyChecking=no ${host[0]} "rm -rf NovaLSM-YCSB-Client"
+#ssh -oStrictHostKeyChecking=no ${host[0]} "git clone https://github.com/HaoyuHuang/NovaLSM-YCSB-Client.git"
+
+if [[ $no_copy != "no_copy" ]]
+then
+  for ((i=0;i<END;i++)); do
+      echo "copying configs on node $i"
+      ssh -oStrictHostKeyChecking=no $user@node-$i.${host} "sudo cp $limit_dir/ulimit.conf /etc/systemd/user.conf"
+      ssh -oStrictHostKeyChecking=no $user@node-$i.${host} "sudo cp $limit_dir/sys_ulimit.conf /etc/systemd/system.conf"
+      ssh -oStrictHostKeyChecking=no $user@node-$i.${host} "sudo cp $limit_dir/limit.conf /etc/security/limits.conf"
+      echo "rebooting $i... connection will be closed"
+      ssh -oStrictHostKeyChecking=no $user@node-$i.${host} "sudo reboot"
+
+#      ssh -oStrictHostKeyChecking=no ${host[i]} "sudo cp $limit_dir/ulimit.conf /etc/systemd/user.conf"
+#      ssh -oStrictHostKeyChecking=no ${host[i]} "sudo cp $limit_dir/sys_ulimit.conf /etc/systemd/system.conf"
+#      ssh -oStrictHostKeyChecking=no ${host[i]} "sudo cp $limit_dir/limit.conf /etc/security/limits.conf"
 #      echo "rebooting $i... connection will be closed"
-#      ssh -oStrictHostKeyChecking=no $user@node-$i.${host} "sudo reboot"
-#
-##      ssh -oStrictHostKeyChecking=no ${host[i]} "sudo cp $limit_dir/ulimit.conf /etc/systemd/user.conf"
-##      ssh -oStrictHostKeyChecking=no ${host[i]} "sudo cp $limit_dir/sys_ulimit.conf /etc/systemd/system.conf"
-##      ssh -oStrictHostKeyChecking=no ${host[i]} "sudo cp $limit_dir/limit.conf /etc/security/limits.conf"
-##      echo "rebooting $i... connection will be closed"
-##      ssh -oStrictHostKeyChecking=no ${host[i]} "sudo reboot"
-#  done
-#else
-#  echo " --------- WARNING: not copying systemd config files on nodes --------"
-#  echo " --------- WARNING: not copying systemd config files on nodes --------"
-#fi
+#      ssh -oStrictHostKeyChecking=no ${host[i]} "sudo reboot"
+  done
+else
+  echo " --------- WARNING: not copying systemd config files on nodes --------"
+  echo " --------- WARNING: not copying systemd config files on nodes --------"
+fi

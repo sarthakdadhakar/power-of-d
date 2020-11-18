@@ -1,5 +1,5 @@
 #!/bin/bash
-home_dir="proj/bg-PG0/sayee"
+home_dir="/proj/bg-PG0/sayee"
 # home_dir="/proj/BG/kanakia"
 config_dir="$home_dir/config"
 db_dir="$home_dir/db"

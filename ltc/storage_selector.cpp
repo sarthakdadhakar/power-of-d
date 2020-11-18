@@ -192,6 +192,7 @@ namespace leveldb {
         NOVA_ASSERT(selected_storages->size() == nstocs);
     }
 
+    // Power of D: Selects available stocs, gets their queue status and sorts the server ids.
     void
     StorageSelector::SelectStorageServers(StoCBlockClient *client,
                                           nova::ScatterPolicy scatter_policy,
@@ -208,7 +209,7 @@ namespace leveldb {
             }
             return;
         }
-        //sayee&sarthak: Power of D for writing
+        // Power of 2 for WRITE operation
         std::vector<uint32_t> candidate_storage_ids;
         if (scatter_policy == nova::ScatterPolicy::POWER_OF_TWO) {
             uint32_t start_storage_id = rand_r(rand_seed_) %
@@ -222,6 +223,7 @@ namespace leveldb {
                 start_storage_id = (start_storage_id + 1) %
                                    available_stocs->servers.size();
             }
+
         } else {
             // Random.
             // Select the start storage id then round robin.
@@ -232,6 +234,11 @@ namespace leveldb {
                 start_storage_id = (start_storage_id + 1) % available_stocs->servers.size();
             }
         }
+
+
+
+        // Power of D: Get the stats, which retrieves queue data and then sorts the one with lowest load.
+
         if (!candidate_storage_ids.empty()) {
             std::vector<StoCStatsStatus> storage_stats;
             for (int i = 0; i < candidate_storage_ids.size(); i++) {
