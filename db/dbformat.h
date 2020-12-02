@@ -185,7 +185,7 @@ namespace leveldb {
     inline LookupKey::~LookupKey() {
         if (start_ != space_) delete[] start_;
     }
-
+//    unsigned int *rand_seed_ = 0;
 }  // namespace leveldb
 
 #endif  // STORAGE_LEVELDB_DB_DBFORMAT_H_

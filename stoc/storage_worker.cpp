@@ -16,6 +16,7 @@
 #include "ltc/stoc_client_impl.h"
 #include "common/nova_config.h"
 #include "db/version_set.h"
+#include <functional>
 
 namespace nova {
     StorageWorker::StorageWorker(

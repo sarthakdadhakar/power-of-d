@@ -1,1 +1,0 @@
-/usr/bin/g++   -g   CMakeFiles/file_reader.dir/novalsm/file_reader.cpp.o  -o file_reader  -lgflags libleveldb.a -lpthread -libverbs -levent -lfmt 

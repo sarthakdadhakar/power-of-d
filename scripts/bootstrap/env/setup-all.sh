@@ -1,8 +1,7 @@
 #!/bin/bash
 
-#example call: ./setup-all sayee
 user=$1
-basedir="/proj/bg-PG0/$user"
+basedir="/users/$user"
 
 echo "basedir... $basedir"
 export DEBIAN_FRONTEND=noninteractive
@@ -38,15 +37,21 @@ sudo apt-get --yes install maven
 sudo apt-get --yes install cmake
 sudo apt-get --yes install run-one
 
-sudo mkfs.ext4 /dev/sdb
-sudo mkdir /db
-sudo mount /dev/sdb /db
-sudo chmod 777 /db
+mount="/dev/sdb"
+if ! grep -qs "$mount" /proc/mounts; then
+  sudo mkfs.ext4 /dev/sdb
+  sudo mkdir /db
+  sudo mount /dev/sdb /db
+  sudo chmod 777 /db
+fi
 
-sudo mkfs.ext4 /dev/sda4
-sudo mkdir /db
-sudo mount /dev/sda4 /db
-sudo chmod 777 /db
+mount="/dev/sda4"
+if ! grep -qs "$mount" /proc/mounts; then
+  sudo mkfs.ext4 /dev/sda4
+  sudo mkdir /db
+  sudo mount /dev/sda4 /db
+  sudo chmod 777 /db
+fi
 
 cd $basedir/gflags && sudo make install
 
@@ -73,14 +78,16 @@ echo ""
 # Enable gdb history
 echo 'set history save on' >> ~/.gdbinit && chmod 600 ~/.gdbinit
 
-cd /tmp/
-wget https://github.com/fmtlib/fmt/releases/download/6.1.2/fmt-6.1.2.zip
-unzip fmt-6.1.2.zip
-cd fmt-6.1.2/ && cmake . && make -j32 && sudo make install
+#cd /tmp/
+#wget https://github.com/fmtlib/fmt/releases/download/6.1.2/fmt-6.1.2.zip
+#rm -rf fmt-6.1.2
+#unzip fmt-6.1.2.zip
+#cd fmt-6.1.2/ && cmake . && make -j32 && sudo make install
 
 
 cd /tmp/
 wget https://github.com/Kitware/CMake/releases/download/v3.13.3/cmake-3.13.3.tar.gz
+rm -rf cmake-3.13.3
 tar -xf cmake-3.13.3.tar.gz
 cd cmake-3.13.3 && ./bootstrap && make -j32 && sudo make install
 
@@ -90,6 +97,7 @@ sudo apt-get install binutils-dev
 
 cd /tmp/
 wget https://prdownloads.sourceforge.net/oprofile/oprofile-1.3.0.tar.gz
+rm -rf oprofile-1.3.0
 tar -xf oprofile-1.3.0.tar.gz
 cd oprofile-1.3.0 && ./configure && make -j32 && sudo make install
 

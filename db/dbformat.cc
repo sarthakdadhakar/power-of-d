@@ -245,7 +245,6 @@ namespace leveldb {
         }
         int replica_id = -1;
         auto servers = leveldb::StorageSelector::available_stoc_servers.load();
-        // power of D : Selecting 1st available replica
         for (int i = 0; i < block_replica_handles.size(); i++) {
             if (servers->server_ids.find(block_replica_handles[i].meta_block_handle.server_id) !=
                 servers->server_ids.end()) {
@@ -255,6 +254,40 @@ namespace leveldb {
         }
         NOVA_ASSERT(replica_id != -1);
         return replica_id;
+    }
+
+    std::map<uint32_t, std::vector<int>> FileMetaData::getAllReplicas() {
+        auto servers = leveldb::StorageSelector::available_stoc_servers.load();
+
+        // server_list
+        std::vector<uint32_t> server_list;
+
+        // map for server_ids and replica_ids
+        std::map<uint32_t, std::vector<int>> server_replica_map;
+
+        if (block_replica_handles.size() == 1) {
+            return server_replica_map;
+        }
+
+        for (int i = 0; i < block_replica_handles.size(); i++) {
+            if (servers->server_ids.find(block_replica_handles[i].meta_block_handle.server_id) !=
+                servers->server_ids.end()) {
+                uint32_t current_server_id = block_replica_handles[i].meta_block_handle.server_id;
+                server_list.push_back(current_server_id);
+                if(server_replica_map.find(current_server_id) == server_replica_map.end()){
+                    // not found
+                    std::vector<int> replica_list;
+                    replica_list.push_back(i);
+                    server_replica_map.insert(std::pair<uint32_t,std::vector<int>>(current_server_id, replica_list));
+                }
+                else {
+                    server_replica_map[current_server_id].push_back(i);
+                }
+            }
+        }
+
+        return server_replica_map;
+
     }
 
     std::string FileMetaData::ShortDebugString() const {

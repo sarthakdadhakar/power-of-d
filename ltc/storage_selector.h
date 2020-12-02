@@ -22,6 +22,10 @@ namespace leveldb {
                                   int num_storage_to_select,
                                   std::vector<uint32_t> *selected_storage);
 
+        uint32_t SelectStorageServersForRead(StoCBlockClient *client,
+                                             nova::ScatterPolicy scatter_policy, int num_storage_to_select,
+                                             std::vector<uint32_t> *selected_storage);
+
         uint32_t SelectAvailableStoCForFailedMetaBlock(
                 const std::vector<FileReplicaMetaData> &block_replica_handles,
                 uint32_t failed_replica_id, bool is_stoc_failed, uint32_t *available_replica_id);

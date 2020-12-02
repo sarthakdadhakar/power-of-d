@@ -177,6 +177,7 @@ namespace leveldb {
         std::string ShortDebugString() const;
 
         int SelectReplica() const;
+        std::map<uint32_t, std::vector<int>> getAllReplicas();
 
         int refs = 0;
         int allowed_seeks = 0;  // Seeks allowed until compaction

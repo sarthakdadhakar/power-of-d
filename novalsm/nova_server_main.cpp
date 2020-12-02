@@ -46,48 +46,48 @@ DEFINE_bool(enable_load_data, false, "Enable loading data.");
 DEFINE_string(ltc_config_path, "/tmp/uniform-3-32-10000000-frags.txt",
               "The path that stores the configuration.");
 DEFINE_uint64(ltc_num_client_workers, 0, "Number of client worker threads.");
-DEFINE_uint32(num_rdma_fg_workers, 0,
+DEFINE_uint64(num_rdma_fg_workers, 0,
               "Number of RDMA foreground worker threads.");
-DEFINE_uint32(num_compaction_workers, 0,
+DEFINE_uint64(num_compaction_workers, 0,
               "Number of compaction worker threads.");
-DEFINE_uint32(num_rdma_bg_workers, 0,
+DEFINE_uint64(num_rdma_bg_workers, 0,
               "Number of RDMA background worker threads.");
 
-DEFINE_uint32(num_storage_workers, 0,
+DEFINE_uint64(num_storage_workers, 0,
               "Number of storage worker threads.");
-DEFINE_uint32(ltc_num_stocs_scatter_data_blocks, 0,
+DEFINE_uint64(ltc_num_stocs_scatter_data_blocks, 0,
               "Number of StoCs to scatter data blocks of an SSTable.");
 
 DEFINE_uint64(block_cache_mb, 0, "block cache size in mb");
 DEFINE_uint64(row_cache_mb, 0, "row cache size in mb. Not supported");
 
-DEFINE_uint32(num_memtables, 0, "Number of memtables.");
-DEFINE_uint32(num_memtable_partitions, 0,
+DEFINE_uint64(num_memtables, 0, "Number of memtables.");
+DEFINE_uint64(num_memtable_partitions, 0,
               "Number of memtable partitions. One active memtable per partition.");
 DEFINE_bool(enable_lookup_index, false, "Enable lookup index.");
 DEFINE_bool(enable_range_index, false, "Enable range index.");
 
-DEFINE_uint32(l0_start_compaction_mb, 0,
+DEFINE_uint64(l0_start_compaction_mb, 0,
               "Level-0 size to start compaction in MB.");
-DEFINE_uint32(l0_stop_write_mb, 0, "Level-0 size to stall writes in MB.");
+DEFINE_uint64(l0_stop_write_mb, 0, "Level-0 size to stall writes in MB.");
 DEFINE_int32(level, 2, "Number of levels.");
 
 DEFINE_uint64(memtable_size_mb, 0, "memtable size in mb");
 DEFINE_uint64(sstable_size_mb, 0, "sstable size in mb");
-DEFINE_uint32(cc_log_buf_size, 0,
+DEFINE_uint64(cc_log_buf_size, 0,
               "log buffer size. Not supported. Same as memtable size.");
-DEFINE_uint32(max_stoc_file_size_mb, 0, "Max StoC file size in MB");
+DEFINE_uint64(max_stoc_file_size_mb, 0, "Max StoC file size in MB");
 DEFINE_bool(use_local_disk, false,
             "Enable LTC to write data to its local disk.");
 DEFINE_string(scatter_policy, "random",
               "Policy to scatter an SSTable, i.e., random/power_of_two");
 DEFINE_string(log_record_mode, "none",
               "Policy for LogC to replicate log records, i.e., none/rdma");
-DEFINE_uint32(num_log_replicas, 0, "Number of replicas for a log record.");
+DEFINE_uint64(num_log_replicas, 0, "Number of replicas for a log record.");
 DEFINE_string(memtable_type, "", "Memtable type, i.e., pool/static_partition");
 
 DEFINE_bool(recover_dbs, false, "Enable recovery");
-DEFINE_uint32(num_recovery_threads, 32, "Number of recovery threads");
+DEFINE_uint64(num_recovery_threads, 32, "Number of recovery threads");
 
 DEFINE_bool(enable_subrange, false, "Enable subranges");
 DEFINE_bool(enable_subrange_reorg, false, "Enable subrange reorganization.");
@@ -97,25 +97,25 @@ DEFINE_string(zipfian_dist_ref_counts, "/tmp/zipfian",
               "Zipfian ref count file used to report load imbalance across subranges.");
 DEFINE_string(client_access_pattern, "uniform",
               "Client access pattern used to report load imbalance across subranges.");
-DEFINE_uint32(num_tinyranges_per_subrange, 10,
+DEFINE_uint64(num_tinyranges_per_subrange, 10,
               "Number of tiny ranges per subrange.");
 
 DEFINE_bool(enable_detailed_db_stats, false,
             "Enable detailed stats. It will report stats such as number of overlapping SSTables between Level-0 and Level-1.");
 DEFINE_bool(enable_flush_multiple_memtables, false,
             "Enable a compaction thread to compact mulitple memtables at the same time.");
-DEFINE_uint32(subrange_no_flush_num_keys, 100,
+DEFINE_uint64(subrange_no_flush_num_keys, 100,
               "A subrange merges memtables into new a memtable if its contained number of unique keys is less than this threshold.");
 DEFINE_string(major_compaction_type, "no",
               "Major compaction type: i.e., no/lc/sc");
-DEFINE_uint32(major_compaction_max_parallism, 1,
+DEFINE_uint64(major_compaction_max_parallism, 1,
               "The maximum compaction parallelism.");
-DEFINE_uint32(major_compaction_max_tables_in_a_set, 15,
+DEFINE_uint64(major_compaction_max_tables_in_a_set, 15,
               "The maximum number of SSTables in a compaction job.");
-DEFINE_uint32(num_sstable_replicas, 1, "Number of replicas for SSTables.");
-DEFINE_uint32(num_sstable_metadata_replicas, 1, "Number of replicas for meta blocks of SSTables.");
+DEFINE_uint64(num_sstable_replicas, 1, "Number of replicas for SSTables.");
+DEFINE_uint64(num_sstable_metadata_replicas, 1, "Number of replicas for meta blocks of SSTables.");
 DEFINE_bool(use_parity_for_sstable_data_blocks, false, "");
-DEFINE_uint32(num_manifest_replicas, 1, "Number of replicas for manifest file.");
+DEFINE_uint64(num_manifest_replicas, 1, "Number of replicas for manifest file.");
 
 DEFINE_int32(fail_stoc_id, -1, "The StoC to fail.");
 DEFINE_int32(exp_seconds_to_fail_stoc, -1,
@@ -304,7 +304,12 @@ int main(int argc, char *argv[]) {
     leveldb::StorageSelector::available_stoc_servers.store(available_stoc_servers);
 
     // Sanity checks.
+    NovaConfig::config->number_of_sstable_metadata_replicas = 2;
+    NovaConfig::config->number_of_sstable_data_replicas = 2;
+
     if (NovaConfig::config->number_of_sstable_data_replicas > 1) {
+        NOVA_LOG(rdmaio::INFO)
+            <<"ss table replicas: "<<NovaConfig::config->number_of_sstable_data_replicas;
         NOVA_ASSERT(NovaConfig::config->number_of_sstable_data_replicas ==
                     NovaConfig::config->number_of_sstable_metadata_replicas);
         NOVA_ASSERT(NovaConfig::config->num_stocs_scatter_data_blocks == 1);

@@ -277,6 +277,7 @@ namespace nova {
         response_buf[len] = MSG_TERMINATER_CHAR;
         conn->response_buf = worker->buf;
         conn->response_size = len + 1;
+        NOVA_LOG(rdmaio::INFO) << "Returning from query config change";
         return true;
     }
 

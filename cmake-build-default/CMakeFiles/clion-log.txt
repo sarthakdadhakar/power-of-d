@@ -1,4 +1,0 @@
-/app/extra/clion/bin/cmake/linux/bin/cmake -G "CodeBlocks - Unix Makefiles" /home/vedant/Desktop/new_repo/power-of-d
--- Configuring done
--- Generating done
--- Build files have been written to: /home/vedant/Desktop/new_repo/power-of-d/cmake-build-default

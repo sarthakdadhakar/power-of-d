@@ -1,1 +1,0 @@
-/usr/bin/g++   -g -g   CMakeFiles/filter_block_test.dir/table/filter_block_test.cc.o  -o filter_block_test  -lgflags libleveldb.a -lpthread -libverbs -levent -lfmt 

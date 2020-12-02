@@ -192,7 +192,6 @@ namespace leveldb {
         NOVA_ASSERT(selected_storages->size() == nstocs);
     }
 
-    // Power of D: Selects available stocs, gets their queue status and sorts the server ids.
     void
     StorageSelector::SelectStorageServers(StoCBlockClient *client,
                                           nova::ScatterPolicy scatter_policy,
@@ -209,7 +208,7 @@ namespace leveldb {
             }
             return;
         }
-        // Power of 2 for WRITE operation
+
         std::vector<uint32_t> candidate_storage_ids;
         if (scatter_policy == nova::ScatterPolicy::POWER_OF_TWO) {
             uint32_t start_storage_id = rand_r(rand_seed_) %
@@ -223,7 +222,6 @@ namespace leveldb {
                 start_storage_id = (start_storage_id + 1) %
                                    available_stocs->servers.size();
             }
-
         } else {
             // Random.
             // Select the start storage id then round robin.
@@ -234,11 +232,6 @@ namespace leveldb {
                 start_storage_id = (start_storage_id + 1) % available_stocs->servers.size();
             }
         }
-
-
-
-        // Power of D: Get the stats, which retrieves queue data and then sorts the one with lowest load.
-
         if (!candidate_storage_ids.empty()) {
             std::vector<StoCStatsStatus> storage_stats;
             for (int i = 0; i < candidate_storage_ids.size(); i++) {
@@ -265,5 +258,67 @@ namespace leveldb {
                 delete storage_stats[i].response;
             }
         }
+    }
+
+    // power of d for read operation
+
+    uint32_t
+    StorageSelector::SelectStorageServersForRead(StoCBlockClient *client,
+                                                 nova::ScatterPolicy scatter_policy,
+                                                 int num_storage_to_select,
+                                                 std::vector<uint32_t> *server_list) {
+        NOVA_ASSERT(client);
+        // Power of 2 for READ operation
+        std::vector<uint32_t> candidate_storage_ids;
+        if (scatter_policy == nova::ScatterPolicy::POWER_OF_TWO) {
+            uint32_t start_storage_id = rand() % server_list->size();
+            uint32_t candidates = 2 * num_storage_to_select;
+            if (candidates > server_list->size()) {
+                candidates = server_list->size();
+            }
+            for (int i = 0; i < candidates; i++) {
+                candidate_storage_ids.push_back(start_storage_id);
+                start_storage_id = (start_storage_id + 1) % server_list->size();
+            }
+        } else {
+            // Random.
+            uint32_t random_storage = rand() % server_list->size();
+            return random_storage;
+        }
+        // Power of D: Get the stats, which retrieves queue data and then sorts the one with lowest load.
+        if (!candidate_storage_ids.empty()) {
+            std::vector<StoCStatsStatus> storage_stats;
+            for (int i = 0; i < candidate_storage_ids.size(); i++) {
+                uint32_t server_id = server_list->at(candidate_storage_ids[i]);
+                uint32_t req_id = client->InitiateReadStoCStats(server_id);
+                StoCStatsStatus status;
+                status.remote_stoc_id = server_id;
+                status.req_id = req_id;
+                status.response = new StoCResponse;
+                storage_stats.push_back(status);
+                NOVA_LOG(rdmaio::INFO)
+                    <<"power-d: printing stats: "<<server_id<<": "<< status.response->stoc_queue_depth;
+            }
+            for (int i = 0; i < storage_stats.size(); i++) {
+                client->Wait();
+            }
+            for (int i = 0; i < storage_stats.size(); i++) {
+                NOVA_ASSERT(client->IsDone(storage_stats[i].req_id, storage_stats[i].response, nullptr));
+            }
+            // sort the stoc stats.
+            std::sort(storage_stats.begin(), storage_stats.end(), stoc_stats_comparator);
+            for (int i = 0; i < num_storage_to_select; i++) {
+                (*server_list)[i] = storage_stats[i].remote_stoc_id;
+            }
+            for (int i = 0; i < storage_stats.size(); i++) {
+                delete storage_stats[i].response;
+            }
+        }
+
+        NOVA_LOG(rdmaio::INFO)
+            <<"power-d: Returning server: "<<server_list->at(0);
+
+        return server_list->at(0);
+
     }
 }

@@ -8,6 +8,7 @@ namespace leveldb {
     FlushOrder::FlushOrder(std::vector<MemTablePartition *> *partitioned_active_memtables)
             : partitioned_active_memtables_(partitioned_active_memtables) {
         latest_generation_id = INIT_GEN_ID;
+        impacted_dranges_.store(nullptr, std::memory_order_seq_cst);
     }
 
     bool FlushOrder::IsSafeToFlush(uint32_t drange_idx, MemTable *memtable) {

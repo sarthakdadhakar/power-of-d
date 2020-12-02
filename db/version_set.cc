@@ -10,6 +10,7 @@
 #include <fmt/core.h>
 #include <getopt.h>
 #include <common/nova_common.h>
+#include <ltc/storage_selector.h>
 #include "ltc/stoc_file_client_impl.h"
 #include "common/nova_console_logging.h"
 
@@ -426,7 +427,7 @@ namespace leveldb {
         return Status::NotFound("Not found in L0");
     }
 
-    Status Version::Get(const ReadOptions &options, const LookupKey &k,
+    Status Version::Get(const ReadOptions &readOptions, const LookupKey &k,
                         SequenceNumber *seq,
                         std::string *value, GetStats *stats,
                         GetSearchScope search_scope,
@@ -458,11 +459,29 @@ namespace leveldb {
 
                 state->last_file_read = f;
                 state->last_file_read_level = level;
-                //sayee&sarthak: read function called here. from here to : dbformat
+                //sayee&power-d: read function called here. from here to : dbformat
+                std::map<uint32_t, std::vector<int>> server_replica_map = f->getAllReplicas();
+                int replica_id = 0;
+                if(!server_replica_map.empty()){
+                    uint32_t num_stocs_to_select = 1;
+                    StorageSelector selector(0);
+                    std::vector<uint32_t> server_list;
+                    for ( const auto &server_replica_pair : server_replica_map ) {
+                        server_list.push_back(server_replica_pair.first);
+                    }
+                    auto client = reinterpret_cast<StoCBlockClient *> (state->options->stoc_client);
+                    uint32_t selected_storage = selector.SelectStorageServersForRead(client,
+                                                                                     nova::NovaConfig::config->scatter_policy,
+                                                                                     num_stocs_to_select,
+                                                                                     &server_list);
+                    std::vector<int> available_replicas = server_replica_map[selected_storage];
+                    replica_id = available_replicas.at(rand() % available_replicas.size());
+                }
+
                 state->s = state->table_cache->Get(*state->options,
                                                    f,
                                                    f->number,
-                                                   f->SelectReplica(),
+                                                   replica_id,
                                                    f->converted_file_size,
                                                    level,
                                                    state->ikey,
@@ -501,7 +520,7 @@ namespace leveldb {
         state.stats = stats;
         state.last_file_read = nullptr;
         state.last_file_read_level = -1;
-        state.options = &options;
+        state.options = &readOptions;
         state.ikey = k.internal_key();
         state.table_cache = table_cache_;
         state.saver.state = kNotFound;

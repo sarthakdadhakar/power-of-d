@@ -198,6 +198,9 @@ namespace nova {
 
     void DBMigration::MigrateDB(const std::vector<nova::LTCFragment *> &migrate_frags) {
         // bump up the configuration id.
+        timeval start{};
+        gettimeofday(&start, nullptr);
+
         std::vector<char *> bufs;
         std::vector<uint32_t> msg_sizes;
         uint32_t cfg_id = NovaConfig::config->current_cfg_id;
@@ -224,12 +227,23 @@ namespace nova {
         for (int i = 0; i < migrate_frags.size(); i++) {
             mem_manager_->FreeItem(0, bufs[i], scid);
         }
+        timeval end{};
+        gettimeofday(&end, nullptr);
+        auto elapsed =
+                (end.tv_sec - start.tv_sec) *
+                1000 *
+                1000 +
+                (end.tv_usec - start.tv_usec);
+        NOVA_LOG(rdmaio::INFO) << "Encoding and send time is: " << elapsed;
         NOVA_LOG(rdmaio::INFO) << fmt::format("!!!Migration complete");
     }
 
     void
     DBMigration::RecoverDBMeta(DBMeta dbmeta) {
         // Open the new database.
+        timeval start{};
+        gettimeofday(&start, nullptr);
+
         NOVA_ASSERT(dbmeta.buf);
         NOVA_ASSERT(dbmeta.buf[0] == leveldb::StoCRequestType::LTC_MIGRATION);
         char *charbuf = dbmeta.buf;
@@ -305,8 +319,29 @@ namespace nova {
             frag->is_ready_signal_.SignalAll();
             frag->is_ready_mutex_.Unlock();
         }
+
+        timeval end{};
+        gettimeofday(&end, nullptr);
+
+        auto elapsed =
+                (end.tv_sec - start.tv_sec) *
+                1000 *
+                1000 +
+                (end.tv_usec - start.tv_usec);
+        NOVA_LOG(rdmaio::INFO) << "Decoding and reconstructing metadata time is: " << elapsed;
+        gettimeofday(&start, nullptr);
+
         leveldb::LogRecovery recover(mem_manager_, client_);
         recover.Recover(actual_memtables_to_recover, cfg_id, dbindex);
+
+        gettimeofday(&end, nullptr);
+        elapsed =
+                (end.tv_sec - start.tv_sec) *
+                1000 *
+                1000 +
+                (end.tv_usec - start.tv_usec);
+        NOVA_LOG(rdmaio::INFO) << "Recovering from log takes: " << elapsed;
+
         threads_for_new_dbs_.emplace_back(std::thread(&leveldb::LTCCompactionThread::Start, reorg));
         threads_for_new_dbs_.emplace_back(std::thread(&leveldb::LTCCompactionThread::Start, coord));
         db->StartCoordinatedCompaction();

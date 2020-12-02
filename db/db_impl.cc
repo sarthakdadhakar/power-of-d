@@ -14,7 +14,7 @@
 #include <vector>
 #include <list>
 #include <fmt/core.h>
-#include <cmath>
+#include <math.h>
 
 #include "db/builder.h"
 #include "db/db_iter.h"

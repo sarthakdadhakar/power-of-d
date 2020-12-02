@@ -1,1 +1,0 @@
-/usr/bin/g++   -g -g   CMakeFiles/bloom_test.dir/util/bloom_test.cc.o  -o bloom_test  -lgflags libleveldb.a -lpthread -libverbs -levent -lfmt 

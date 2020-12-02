@@ -4,9 +4,9 @@
 // Copyright (c) 2020 University of Southern California. All rights reserved.
 //
 
-#include <cmath>
 #include "subrange_manager.h"
 #include "memtable.h"
+#include <math.h>
 
 namespace leveldb {
     SubRangeManager::SubRangeManager(leveldb::StoCWritableFileClient *manifest_file,
